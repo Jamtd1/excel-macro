@@ -1,0 +1,3844 @@
+Sub PressureLossCopperPipe()
+
+'Define input variables
+
+    Dim energy_used
+
+    Dim pipe_size_1
+    Dim pipe_size_2
+    Dim pipe_size_3
+    Dim pipe_size_4
+    Dim pipe_size_5
+
+    Dim user_defined_pipe_size_1
+    Dim user_defined_pipe_size_2
+    Dim user_defined_pipe_size_3
+    Dim user_defined_pipe_size_4
+    Dim user_defined_pipe_size_5
+
+    Dim user_defined_internal_diameter_1
+    Dim user_defined_internal_diameter_2
+    Dim user_defined_internal_diameter_3
+    Dim user_defined_internal_diameter_4
+    Dim user_defined_internal_diameter_5
+
+    Dim length_1
+    Dim length_2
+    Dim length_3
+    Dim length_4
+    Dim length_5
+
+    Dim fluid_type_1
+    Dim fluid_type_2
+    Dim fluid_type_3
+    Dim fluid_type_4
+    Dim fluid_type_5
+
+    Dim pipe_type_1
+    Dim pipe_type_2
+    Dim pipe_type_3
+    Dim pipe_type_4
+    Dim pipe_type_5
+
+    Dim equivalent_roughness_1
+    Dim equivalent_roughness_2
+    Dim equivalent_roughness_3
+    Dim equivalent_roughness_4
+    Dim equivalent_roughness_5
+
+'define array variables
+
+    Dim pipe_size_array
+    Dim pressure_loss_per_length_array
+    Dim pipe6_array
+    Dim pipe8_array
+    Dim pipe10_array
+    Dim pipe12_array
+    Dim pipe15_array
+    Dim pipe22_array
+    Dim pipe28_array
+    Dim pipe35_array
+    Dim pipe42_array
+    Dim pipe54_array
+    Dim fluid_type_array
+    Dim pipe_type_array
+    Dim flow_rate_array
+    Dim pipe_size_table_array
+
+'define results variables
+
+    Dim energy_used_result
+    Dim volume_gas_result
+    Dim flow_rate_of_gas_result
+    Dim density
+    Dim dynamic_viscosity
+    Dim actual_flow_rate
+
+    Dim pipe_type_result_1
+    Dim pipe_type_result_2
+    Dim pipe_type_result_3
+    Dim pipe_type_result_4
+    Dim pipe_type_result_5
+
+    Dim fluid_type_result_1
+    Dim fluid_type_result_2
+    Dim fluid_type_result_3
+    Dim fluid_type_result_4
+    Dim fluid_type_result_5
+
+    Dim equivalent_roughness_result_1
+    Dim equivalent_roughness_result_2
+    Dim equivalent_roughness_result_3
+    Dim equivalent_roughness_result_4
+    Dim equivalent_roughness_result_5
+
+    Dim internal_diameter_result_1
+    Dim internal_diameter_result_2
+    Dim internal_diameter_result_3
+    Dim internal_diameter_result_4
+    Dim internal_diameter_result_5
+
+    Dim internal_area_1
+    Dim internal_area_2
+    Dim internal_area_3
+    Dim internal_area_4
+    Dim internal_area_5
+
+    Dim reynolds_number_1
+    Dim reynolds_number_2
+    Dim reynolds_number_3
+    Dim reynolds_number_4
+    Dim reynolds_number_5
+
+    Dim velocity_1
+    Dim velocity_2
+    Dim velocity_3
+    Dim velocity_4
+    Dim velocity_5
+
+    Dim type_of_flow_1
+    Dim type_of_flow_2
+    Dim type_of_flow_3
+    Dim type_of_flow_4
+    Dim type_of_flow_5
+
+    Dim relative_roughness_1
+    Dim relative_roughness_2
+    Dim relative_roughness_3
+    Dim relative_roughness_4
+    Dim relative_roughness_5
+
+    Dim friction_coefficient_1
+    Dim friction_coefficient_2
+    Dim friction_coefficient_3
+    Dim friction_coefficient_4
+    Dim friction_coefficient_5
+
+    Dim pipe_size_result_1
+    Dim pipe_size_result_2
+    Dim pipe_size_result_3
+    Dim pipe_size_result_4
+    Dim pipe_size_result_5
+
+    Dim length_result_1
+    Dim length_result_2
+    Dim length_result_3
+    Dim length_result_4
+    Dim length_result_5
+
+    Dim pressure_loss_Pa_1
+    Dim pressure_loss_Pa_2
+    Dim pressure_loss_Pa_3
+    Dim pressure_loss_Pa_4
+    Dim pressure_loss_Pa_5
+
+    Dim pressure_loss_millibar_1
+    Dim pressure_loss_millibar_2
+    Dim pressure_loss_millibar_3
+    Dim pressure_loss_millibar_4
+    Dim pressure_loss_millibar_5
+
+    Dim pressure_loss_per_length_calc_1
+    Dim pressure_loss_per_length_calc_2
+    Dim pressure_loss_per_length_calc_3
+    Dim pressure_loss_per_length_calc_4
+    Dim pressure_loss_per_length_calc_5
+
+    Dim flow_rate_table_qv_1
+    Dim flow_rate_table_qv_2
+    Dim flow_rate_table_qv_3
+    Dim flow_rate_table_qv_4
+    Dim flow_rate_table_qv_5
+
+    Dim pressure_loss_per_length_table_1
+    Dim pressure_loss_per_length_table_2
+    Dim pressure_loss_per_length_table_3
+    Dim pressure_loss_per_length_table_4
+    Dim pressure_loss_per_length_table_5
+
+'define calculation variables
+
+    Dim a
+    Dim b
+    Dim c
+    Dim d
+    Dim e
+    Dim f
+    Dim g
+    Dim h
+    Dim i
+    Dim j
+    Dim k
+    Dim l
+    Dim m
+    Dim n
+    Dim o
+    Dim p
+    Dim q
+    Dim r
+    Dim s
+    Dim t
+    Dim u
+    Dim v
+    Dim w
+    Dim x
+    Dim y
+    Dim z
+
+'define code variables
+
+    Dim flow_rate_column
+    Dim flow_rate_row
+
+
+
+If Range("pipe_type_1") <> "N/A" Then
+
+
+
+            '1. Clear user defined fields
+
+                If Range("pipe_size_1") <> "Other" Then
+
+                    Range("user_defined_pipe_size_1") = " "
+                    Range("user_defined_internal_diameter_1") = " "
+
+                Else
+
+                End If
+
+
+            '2. Determine type of fluid
+
+                fluid_type_1 = Range("fluid_type_1")
+
+                If fluid_type_1 = "Natural Gas" Then
+
+                    dynamic_viscosity = 0.0000107
+
+                    Range("dynamic_viscosity") = dynamic_viscosity
+
+                    density = 0.68
+
+                    Range("density") = density
+
+                Else
+
+                    MsgBox "Only Natural Gas is available at this time"
+                    Exit Sub
+
+                End If
+
+            '3. Determine the pipe material
+
+            'Pipe 1
+
+                pipe_type_1 = Range("pipe_type_1")
+
+                If pipe_type_1 = "Copper, Cu (k = 0.0015)" Then
+
+                    equivalent_roughness_result_1 = 0.0015
+
+                    Range("equivalent_roughness_1") = " "
+
+                ElseIf pipe_type_1 = "Copper, Cu (k = 0.01)" Then
+
+                    equivalent_roughness_result_1 = 0.01
+
+                    Range("equivalent_roughness_1") = " "
+
+                ElseIf pipe_type_1 = "PE (k = 0.000005)" Then
+
+                    equivalent_roughness_result_1 = 0.000005
+
+                    Range("equivalent_roughness_1") = " "
+
+                Else
+
+                    equivalent_roughness_result_1 = Range("equivalent_roughness_1")
+
+                    If IsEmpty(equivalent_roughness_result_1) Then
+
+                        MsgBox "Error: No value in equivalent roughness cell"
+
+                        Exit Sub
+
+                    Else
+
+                    End If
+
+                End If
+
+             Range("pipe_type_results_1") = pipe_type_1
+             Range("equivalent_roughness_result_1") = equivalent_roughness_result_1
+
+
+            'Determine pipe size, internal diameter, internal area.
+
+            '4. Pipe Size
+
+                pipe_size_1 = Range("pipe_size_1")
+
+                If pipe_size_1 = "Other" Then
+
+                    pipe_size_result_1 = Range("user_defined_pipe_size_1")
+
+                Else
+
+                    pipe_size_result_1 = pipe_size_1
+
+                End If
+
+            '5. Internal Diameter
+
+                If pipe_size_1 = "Other" Then
+
+                    internal_diameter_result_1 = Range("user_defined_internal_diameter_1")
+
+                Else
+
+                    internal_diameter_result_1 = Switch(pipe_size_1 = 6, 0.0048, _
+                                       pipe_size_1 = 8, 0.0068, _
+                                       pipe_size_1 = 10, 0.0088, _
+                                       pipe_size_1 = 12, 0.0108, _
+                                       pipe_size_1 = 15, 0.0136, _
+                                       pipe_size_1 = 22, 0.02022, _
+                                       pipe_size_1 = 28, 0.02622, _
+                                       pipe_size_1 = 35, 0.03263, _
+                                       pipe_size_1 = 42, 0.03963, _
+                                       pipe_size_1 = 54, 0.05163)
+
+                End If
+
+                Range("pipe_size_result_1") = pipe_size_result_1
+
+                Range("internal_diameter_result_1") = internal_diameter_result_1
+
+            '6. Internal Area
+
+                internal_area_1 = (Application.Pi() * (internal_diameter_result_1 ^ 2)) / 4
+
+                Range("internal_area_1") = Round(internal_area_1, 6)
+
+            'Determine energy used, vloume of gas, flow rate of gas, actual flow rate
+
+            '7. Energy used
+
+                energy_used_result = Range("energy_used")
+
+                Range("energy_used_result") = energy_used_result
+
+            '8. Volume of gas
+
+                volume_gas_result = energy_used_result / 11
+
+                Range("volume_gas_result") = volume_gas_result
+
+            '9. Flow rate of gas
+
+                flow_rate_of_gas_result = volume_gas_result / 3600
+
+                Range("flow_rate_of_gas") = Round(flow_rate_of_gas_result, 6)
+
+            '10. Actual flow rate
+
+                actual_flow_rate = flow_rate_of_gas_result
+
+                Range("actual_flow_rate") = Round(actual_flow_rate, 6)
+
+            '11. Determine velocity
+
+                velocity_1 = actual_flow_rate / internal_area_1
+
+                Range("velocity_1") = Round(velocity_1, 6)
+
+            '12. Determine Reynolds Number, Type of flow (needs error checking)
+
+                z = density * velocity_1 * internal_diameter_result_1
+
+                reynolds_number_1 = z / dynamic_viscosity
+
+                Range("reynolds_number_1") = Round(reynolds_number_1, 2)
+
+            '13. Determine the type of flow
+
+                If pipe_type_1 = "PE (k = 0.000005)" Or pipe_type_1 = "PE (k = other)" Then
+
+                    type_of_flow_1 = Switch(reynolds_number_1 <= 2000, "Laminar Flow", _
+                                          reynolds_number_1 > 2000, "Turbulent Flow")
+
+                    Range("type_of_flow_1") = type_of_flow_1
+
+                Else
+
+                    type_of_flow_1 = Switch(reynolds_number_1 < 2000, "Laminar Flow", _
+                                      reynolds_number_1 > 3000, "Turbulent Flow", _
+                                      reynolds_number_1 > 2000 And reynolds_number_1 < 3000, "Intermediate Zone")
+
+                    If pipe_size_ <> "Other" Then
+
+                        Range("type_of_flow_1") = type_of_flow_1
+
+                    Else
+
+                        If type_of_flow_1 = "Intermediate Zone" Then
+
+                            MsgBox "Error: Using this pipe size will result in intermediate flow." _
+                            & vbNewLine & "Please select a different pipe size or use a pre-defined size."
+
+                        Else
+
+                        End If
+
+                    End If
+
+                End If
+
+            '14. Determin friction coefficient (lambna)
+
+                friction_coefficient_1 = "N/A"
+
+                If type_of_flow_1 = "Laminar Flow" Then
+
+                    friction_coefficient_1 = 64 / reynolds_number_1
+
+
+                ElseIf type_of_flow_1 = "Turbulent Flow" Then
+
+                    'Altshul's equation 1st iteration
+
+                    relative_roughness_1 = equivalent_roughness_result_1 / internal_diameter_result_1
+                    Range("relative_roughness_1") = relative_roughness_1
+
+                    a = 0.11 * ((relative_roughness_1 + (68 / reynolds_number_1)) ^ 0.25)
+                    a = Round(a, 5)
+
+                    c = Sqr(a)
+                    c = Round(c, 5)
+
+                    b = 1 / c
+                    b = Round(b, 5)
+
+
+                    'repeat (do) the formula until the numbers converge so that the value is the same til two decimal places.
+
+                    i = 0
+                    m = 0
+                    j = Round(b, 2)
+
+                    Do
+
+                    e = relative_roughness_1 / 3.7
+                    e = Round(e, 5)
+
+                    f = reynolds_number_1 * c
+                    f = Round(f, 5)
+
+                    g = 2.51 / f
+                    g = Round(g, 5)
+
+                    h = ((g) + e)
+                    h = Round(h, 5)
+
+                    d = (-2) * Application.Log(h, 10)
+                    d = Round(d, 5)
+
+                    i = 1 + i
+                    k = Round(d, 2)
+
+                    If j <> k Then
+                    j = k
+                    Else
+                        m = k
+                    End If
+
+                    Loop Until m = j
+
+                    n = 1 / (d ^ 2)
+                    n = Round(n, 5)
+
+                    friction_coefficient_1 = n
+
+
+                Else
+
+                End If
+
+                Range("friction_coefficient_1") = friction_coefficient_1
+
+
+            '15. Calculate the pressure loss factor
+
+                length_result_1 = Range("length_1")
+                Range("length_result_1") = length_result_1
+
+                If friction_coefficient_1 <> "N/A" Then
+
+                    pressure_loss_Pa_1 = (friction_coefficient_1 * (length_result_1 / internal_diameter_result_1) * (1 / 2) * density * (velocity_1 ^ 2))
+
+                    Range("pressure_loss_Pa_1") = Round(pressure_loss_Pa_1, 2)
+
+                    Range("flow_rate_table_qv_1") = " "
+                    Range("pressure_loss_per_length_table_1") = " "
+
+                Else
+
+                    'Determine the column to look up the number by using the pipe size
+
+                    flow_rate_column = Application.Match(Range("pipe_size_result_1"), Range("pipe_size_table_array"), 0)
+
+                    'which array should be used to determin the row
+
+                    If pipe_size_1 = 6 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe6_array"), -1)
+
+                    ElseIf pipe_size_1 = 8 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe8_array"), -1)
+
+                    ElseIf pipe_size_1 = 10 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe10_array"), -1)
+
+                    ElseIf pipe_size_1 = 12 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe12_array"), -1)
+
+                    ElseIf pipe_size_1 = 15 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe15_array"), -1)
+
+                    ElseIf pipe_size_1 = 22 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe22_array"), -1)
+
+                    ElseIf pipe_size_1 = 28 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe28_array"), -1)
+
+                    ElseIf pipe_size_1 = 35 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe35_array"), -1)
+
+                    ElseIf pipe_size_1 = 42 Then
+                        flow_rate_row = Application.Match(Range("actual_flow_rate"), Range("pipe42_array"), -1)
+
+                    ElseIf pipe_size_1 = 54 Then
+                        flow_rate_row = Application.Match(Range("actual_flow_rate"), Range("pipe54_array"), -1)
+
+                    Else
+
+                    End If
+
+                    flow_rate_table_qv_1 = Application.Index(Range("flow_rate_array"), flow_rate_row, flow_rate_column)
+
+                    Range("flow_rate_table_qv_1") = flow_rate_table_qv_1
+
+                    'Delta P per Length
+
+                    pressure_loss_per_length_table_1 = Application.Index(Range("pressure_loss_per_length_array"), flow_rate_row, 0)
+
+                    Range("pressure_loss_per_length_table_1") = pressure_loss_per_length_table_1
+
+                    'Pressure Loss
+
+                    pressure_loss_Pa_1 = pressure_loss_per_length_table_1 / length_result_1
+
+                    Range("pressure_loss_Pa_1") = Round(pressure_loss_Pa_1, 2)
+
+
+                End If
+
+Else
+    Range("Pipe1") = " "
+
+End If
+
+
+'Pipe 2
+
+If Range("pipe_type_2") <> "N/A" Then
+
+            '1. Clear user defined fields
+
+                If Range("pipe_size_2") <> "Other" Then
+
+                    Range("user_defined_pipe_size_2") = " "
+                    Range("user_defined_internal_diameter_2") = " "
+
+                Else
+
+                End If
+
+
+            '2. Determine type of fluid
+
+                fluid_type_2 = Range("fluid_type_2")
+
+                If fluid_type_2 = "Natural Gas" Then
+
+                    dynamic_viscosity = 0.0000107
+
+                    Range("dynamic_viscosity") = dynamic_viscosity
+
+                    density = 0.68
+
+                    Range("density") = density
+
+                Else
+
+                    MsgBox "Only Natural Gas is available at this time"
+                    Exit Sub
+
+                End If
+
+            '3. Determine the pipe material
+
+            'Pipe 1
+
+                pipe_type_2 = Range("pipe_type_2")
+
+                If pipe_type_2 = "Copper,Cu (k = 0.0015)" Then
+
+                    equivalent_roughness_result_2 = 0.0015
+
+                    Range("equivalent_roughness_2") = " "
+
+                ElseIf pipe_type_2 = "Copper,Cu (k = 0.01)" Then
+
+                    equivalent_roughness_result_2 = 0.01
+
+                    Range("equivalent_roughness_2") = " "
+
+                ElseIf pipe_type_2 = "PE (k = 0.000005)" Then
+
+                    equivalent_roughness_result_2 = 0.000005
+
+                    Range("equivalent_roughness_2") = " "
+
+                Else
+
+                    equivalent_roughness_result_2 = Range("equivalent_roughness_2")
+
+                    If IsEmpty(equivalent_roughness_result_2) Then
+
+                        MsgBox "Error: No value in equivalent roughness cell"
+
+                        Exit Sub
+
+                    Else
+
+                    End If
+
+                End If
+
+            Range("equivalent_roughness_result_2") = equivalent_roughness_result_2
+            Range("pipe_type_results_2") = pipe_type_2
+
+            'Determine pipe size, internal diameter, internal area.
+
+            '4. Pipe Size
+
+                pipe_size_2 = Range("pipe_size_2")
+
+                If pipe_size_2 = "Other" Then
+
+                    pipe_size_result_2 = Range("user_defined_pipe_size_2")
+
+                Else
+
+                    pipe_size_result_2 = pipe_size_2
+
+                End If
+
+            '5. Internal Diameter
+
+                If pipe_size_2 = "Other" Then
+
+                    internal_diameter_result_2 = Range("user_defined_internal_diameter_2")
+
+                Else
+
+                    internal_diameter_result_2 = Switch(pipe_size_2 = 6, 0.0048, _
+                                       pipe_size_2 = 8, 0.0068, _
+                                       pipe_size_2 = 10, 0.0088, _
+                                       pipe_size_2 = 12, 0.0108, _
+                                       pipe_size_2 = 15, 0.0136, _
+                                       pipe_size_2 = 22, 0.02022, _
+                                       pipe_size_2 = 28, 0.02622, _
+                                       pipe_size_2 = 35, 0.03263, _
+                                       pipe_size_2 = 42, 0.03963, _
+                                       pipe_size_2 = 54, 0.05163)
+
+                End If
+
+                Range("pipe_size_result_2") = pipe_size_result_2
+
+                Range("internal_diameter_result_2") = internal_diameter_result_2
+
+            '6. Internal Area
+
+                internal_area_2 = (Application.Pi() * (internal_diameter_result_2 ^ 2)) / 4
+
+                Range("internal_area_2") = Round(internal_area_2, 6)
+
+            'Determine energy used, vloume of gas, flow rate of gas, actual flow rate
+
+            '7. Energy used
+
+                energy_used_result = Range("energy_used")
+
+                Range("energy_used_result") = energy_used_result
+
+            '8. Volume of gas
+
+                volume_gas_result = energy_used_result / 11
+
+                Range("volume_gas_result") = volume_gas_result
+
+            '9. Flow rate of gas
+
+                flow_rate_of_gas_result = volume_gas_result / 3600
+
+                Range("flow_rate_of_gas") = Round(flow_rate_of_gas_result, 6)
+
+            '10. Actual flow rate
+
+                actual_flow_rate = flow_rate_of_gas_result
+
+                Range("actual_flow_rate") = Round(actual_flow_rate, 6)
+
+            '11. Determine velocity
+
+                velocity_2 = actual_flow_rate / internal_area_2
+
+                Range("velocity_2") = Round(velocity_2, 6)
+
+            '12. Determine Reynolds Number, Type of flow (needs error checking)
+
+                z = density * velocity_2 * internal_diameter_result_2
+
+                reynolds_number_2 = z / dynamic_viscosity
+
+                Range("reynolds_number_2") = Round(reynolds_number_2, 2)
+
+            '13. Determine the type of flow
+
+                If pipe_type_2 = "PE (k = 0.000005)" Or pipe_type_2 = "PE (k = other)" Then
+
+                    type_of_flow_2 = Switch(reynolds_number_2 <= 2000, "Laminar Flow", _
+                                          reynolds_number_2 > 2000, "Turbulent Flow")
+
+                    Range("type_of_flow_2") = type_of_flow_2
+
+                Else
+
+                    type_of_flow_2 = Switch(reynolds_number_2 < 2000, "Laminar Flow", _
+                                      reynolds_number_2 > 3000, "Turbulent Flow", _
+                                      reynolds_number_2 > 2000 And reynolds_number_2 < 3000, "Intermediate Zone")
+
+                    If pipe_size_2 <> "Other" Then
+
+                        Range("type_of_flow_2") = type_of_flow_2
+
+                    Else
+
+                        If type_of_flow_2 = "Intermediate Zone" Then
+
+                            MsgBox "Error: Using this pipe size will result in intermediate flow." _
+                            & vbNewLine & "Please select a different pipe size or use a pre-defined size."
+
+                        Else
+
+                        End If
+
+                    End If
+
+                End If
+
+            '14. Determin friction coefficient (lambna)
+
+                friction_coefficient_2 = "N/A"
+
+                If type_of_flow_2 = "Laminar Flow" Then
+
+                    friction_coefficient_2 = 64 / reynolds_number_2
+
+                ElseIf type_of_flow_2 = "Turbulent Flow" Then
+
+                    'Altshul's equation 1st iteration
+
+                    relative_roughness_2 = equivalent_roughness_result_2 / internal_diameter_result_2
+                    Range("relative_roughness_2") = relative_roughness_2
+
+                    a = 0.11 * ((relative_roughness_2 + (68 / reynolds_number_2)) ^ 0.25)
+                    a = Round(a, 5)
+
+                    c = Sqr(a)
+                    c = Round(c, 5)
+
+                    b = 1 / c
+                    b = Round(b, 5)
+
+
+                    'repeat (do) the formula until the numbers converge so that the value is the same til two decimal places.
+
+                    i = 0
+                    m = 0
+                    j = Round(b, 2)
+
+                    Do
+
+                    e = relative_roughness_2 / 3.7
+                    e = Round(e, 5)
+
+                    f = reynolds_number_2 * c
+                    f = Round(f, 5)
+
+                    g = 2.51 / f
+                    g = Round(g, 5)
+
+                    h = ((g) + e)
+                    h = Round(h, 5)
+
+                    d = (-2) * Application.Log(h, 10)
+                    d = Round(d, 5)
+
+                    i = 1 + i
+                    k = Round(d, 2)
+
+                    If j <> k Then
+                    j = k
+                    Else
+                        m = k
+                    End If
+
+                    Loop Until m = j
+
+                    n = 1 / (d ^ 2)
+                    n = Round(n, 5)
+                    friction_coefficient_2 = n
+
+
+                Else
+
+                End If
+
+                Range("friction_coefficient_2") = friction_coefficient_2
+
+            '15. Calculate the pressure loss factor
+
+                length_result_2 = Range("length_2")
+                Range("length_result_2") = length_result_2
+
+                If friction_coefficient_2 <> "N/A" Then
+
+                    pressure_loss_Pa_2 = (friction_coefficient_2 * length_result_2 * density * (velocity_2 ^ 2)) / (2 * internal_diameter_result_2)
+
+                    Range("pressure_loss_Pa_2") = Round(pressure_loss_Pa_2, 2)
+
+                    Range("flow_rate_table_qv_2") = " "
+                    Range("pressure_loss_per_length_table_2") = " "
+
+                Else
+
+                    'Determine the column to look up the number by using the pipe size
+
+                    flow_rate_column = Application.Match(Range("pipe_size_result_2"), Range("pipe_size_table_array"), 0)
+
+                    'which array should be used to determin the row
+
+                    If pipe_size_2 = 6 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe6_array"), -1)
+
+                    ElseIf pipe_size_2 = 8 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe8_array"), -1)
+
+                    ElseIf pipe_size_2 = 10 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe10_array"), -1)
+
+                    ElseIf pipe_size_2 = 12 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe12_array"), -1)
+
+                    ElseIf pipe_size_2 = 15 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe15_array"), -1)
+
+                    ElseIf pipe_size_2 = 22 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe22_array"), -1)
+
+                    ElseIf pipe_size_2 = 28 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe28_array"), -1)
+
+                    ElseIf pipe_size_2 = 35 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe35_array"), -1)
+
+                    ElseIf pipe_size_2 = 42 Then
+                        flow_rate_row = Application.Match(Range("actual_flow_rate"), Range("pipe42_array"), -1)
+
+                    ElseIf pipe_size_2 = 54 Then
+                        flow_rate_row = Application.Match(Range("actual_flow_rate"), Range("pipe54_array"), -1)
+
+                    Else
+
+                    End If
+
+                    flow_rate_table_qv_2 = Application.Index(Range("flow_rate_array"), flow_rate_row, flow_rate_column)
+
+                    Range("flow_rate_table_qv_2") = flow_rate_table_qv_2
+
+                    pressure_loss_per_length_table_2 = Application.Index(Range("pressure_loss_per_length_array"), flow_rate_row, 0)
+
+                    Range("pressure_loss_per_length_table_2") = pressure_loss_per_length_table_2
+
+                    'Pressure Loss
+
+                    pressure_loss_Pa_2 = (pressure_loss_per_length_table_2 / length_result_2)
+
+                    Range("pressure_loss_Pa_2") = Round(pressure_loss_Pa_2, 2)
+
+                End If
+
+
+
+Else
+    Range("Pipe2") = " "
+
+End If
+
+'Pipe 3
+
+If Range("pipe_type_3") <> "N/A" Then
+
+            '1. Clear user defined fields
+
+                If Range("pipe_size_3") <> "Other" Then
+
+                    Range("user_defined_pipe_size_3") = " "
+                    Range("user_defined_internal_diameter_3") = " "
+
+                Else
+
+                End If
+
+
+            '2. Determine type of fluid
+
+                fluid_type_3 = Range("fluid_type_3")
+
+                If fluid_type_3 = "Natural Gas" Then
+
+                    dynamic_viscosity = 0.0000107
+
+                    Range("dynamic_viscosity") = dynamic_viscosity
+
+                    density = 0.68
+
+                    Range("density") = density
+
+                Else
+
+                    MsgBox "Only Natural Gas is available at this time"
+                    Exit Sub
+
+                End If
+
+            '3. Determine the pipe material
+
+            'Pipe 1
+
+                pipe_type_3 = Range("pipe_type_3")
+
+                If pipe_type_3 = "Copper, Cu (k = 0.0015)" Then
+
+                    equivalent_roughness_result_3 = 0.0015
+
+                    Range("equivalent_roughness_3") = " "
+
+                ElseIf pipe_type_3 = "Copper, Cu (k = 0.01)" Then
+
+                    equivalent_roughness_result_3 = 0.01
+
+                    Range("equivalent_roughness_3") = " "
+
+                ElseIf pipe_type_3 = "PE (k = 0.000005)" Then
+
+                    equivalent_roughness_result_3 = 0.000005
+
+                    Range("equivalent_roughness_3") = " "
+
+                Else
+
+                    equivalent_roughness_result_3 = Range("equivalent_roughness_3")
+
+                    If IsEmpty(equivalent_roughness_result_3) Then
+
+                        MsgBox "Error: No value in equivalent roughness cell"
+
+                        Exit Sub
+
+                    Else
+
+                    End If
+
+                End If
+
+             Range("pipe_type_results_3") = pipe_type_3
+             Range("equivalent_roughness_result_3") = equivalent_roughness_result_3
+
+
+            'Determine pipe size, internal diameter, internal area.
+
+            '4. Pipe Size
+
+                pipe_size_3 = Range("pipe_size_3")
+
+                If pipe_size_3 = "Other" Then
+
+                    pipe_size_result_3 = Range("user_defined_pipe_size_3")
+
+                Else
+
+                    pipe_size_result_3 = pipe_size_3
+
+                End If
+
+            '5. Internal Diameter
+
+                If pipe_size_3 = "Other" Then
+
+                    internal_diameter_result_3 = Range("user_defined_internal_diameter_3")
+
+                Else
+
+                    internal_diameter_result_3 = Switch(pipe_size_3 = 6, 0.0048, _
+                                       pipe_size_3 = 8, 0.0068, _
+                                       pipe_size_3 = 10, 0.0088, _
+                                       pipe_size_3 = 12, 0.0108, _
+                                       pipe_size_3 = 15, 0.0136, _
+                                       pipe_size_3 = 22, 0.02022, _
+                                       pipe_size_3 = 28, 0.02622, _
+                                       pipe_size_3 = 35, 0.03263, _
+                                       pipe_size_3 = 42, 0.03963, _
+                                       pipe_size_3 = 54, 0.05163)
+
+                End If
+
+                Range("pipe_size_result_3") = pipe_size_result_3
+
+                Range("internal_diameter_result_3") = internal_diameter_result_3
+
+            '6. Internal Area
+
+                internal_area_3 = (Application.Pi() * (internal_diameter_result_3 ^ 2)) / 4
+
+                Range("internal_area_3") = Round(internal_area_3, 6)
+
+            'Determine energy used, vloume of gas, flow rate of gas, actual flow rate
+
+            '7. Energy used
+
+                energy_used_result = Range("energy_used")
+
+                Range("energy_used_result") = energy_used_result
+
+            '8. Volume of gas
+
+                volume_gas_result = energy_used_result / 11
+
+                Range("volume_gas_result") = volume_gas_result
+
+            '9. Flow rate of gas
+
+                flow_rate_of_gas_result = volume_gas_result / 3600
+
+                Range("flow_rate_of_gas") = Round(flow_rate_of_gas_result, 6)
+
+            '10. Actual flow rate
+
+                actual_flow_rate = flow_rate_of_gas_result
+
+                Range("actual_flow_rate") = Round(actual_flow_rate, 6)
+
+            '11. Determine velocity
+
+                velocity_3 = actual_flow_rate / internal_area_3
+
+                Range("velocity_3") = Round(velocity_3, 6)
+
+            '12. Determine Reynolds Number, Type of flow (needs error checking)
+
+                z = density * velocity_3 * internal_diameter_result_3
+
+                reynolds_number_3 = z / dynamic_viscosity
+
+                Range("reynolds_number_3") = Round(reynolds_number_3, 2)
+
+            '13. Determine the type of flow
+
+                If pipe_type_3 = "PE (k = 0.000005)" Or pipe_type_3 = "PE (k = other)" Then
+
+                    type_of_flow_3 = Switch(reynolds_number_3 <= 2000, "Laminar Flow", _
+                                          reynolds_number_3 > 2000, "Turbulent Flow")
+
+                    Range("type_of_flow_3") = type_of_flow_3
+
+                Else
+
+                    type_of_flow_3 = Switch(reynolds_number_3 < 2000, "Laminar Flow", _
+                                      reynolds_number_3 > 3000, "Turbulent Flow", _
+                                      reynolds_number_3 > 2000 And reynolds_number_3 < 3000, "Intermediate Zone")
+
+                    If pipe_size_ <> "Other" Then
+
+                        Range("type_of_flow_3") = type_of_flow_3
+
+                    Else
+
+                        If type_of_flow_3 = "Intermediate Zone" Then
+
+                            MsgBox "Error: Using this pipe size will result in intermediate flow." _
+                            & vbNewLine & "Please select a different pipe size or use a pre-defined size."
+
+                        Else
+
+                        End If
+
+                    End If
+
+                End If
+
+            '14. Determin friction coefficient (lambna)
+
+                friction_coefficient_3 = "N/A"
+
+                If type_of_flow_3 = "Laminar Flow" Then
+
+                    friction_coefficient_3 = 64 / reynolds_number_3
+
+                ElseIf type_of_flow_3 = "Turbulent Flow" Then
+
+                    'Altshul's equation 1st iteration
+
+                    relative_roughness_3 = equivalent_roughness_result_3 / internal_diameter_result_3
+                    Range("relative_roughness_3") = relative_roughness_3
+
+                    a = 0.11 * ((relative_roughness_3 + (68 / reynolds_number_3)) ^ 0.25)
+                    a = Round(a, 5)
+
+                    c = Sqr(a)
+                    c = Round(c, 5)
+
+                    b = 1 / c
+                    b = Round(b, 5)
+
+
+                    'repeat (do) the formula until the numbers converge so that the value is the same til two decimal places.
+
+                    i = 0
+                    m = 0
+                    j = Round(b, 2)
+
+                    Do
+
+                    e = relative_roughness_3 / 3.7
+                    e = Round(e, 5)
+
+                    f = reynolds_number_3 * c
+                    f = Round(f, 5)
+
+                    g = 2.51 / f
+                    g = Round(g, 5)
+
+                    h = ((g) + e)
+                    h = Round(h, 5)
+
+                    d = (-2) * Application.Log(h, 10)
+                    d = Round(d, 5)
+
+                    i = 1 + i
+                    k = Round(d, 2)
+
+                    If j <> k Then
+                    j = k
+                    Else
+                        m = k
+                    End If
+
+                    Loop Until m = j
+
+                n = 1 / (d ^ 2)
+                n = Round(n, 5)
+
+                friction_coefficient_3 = n
+
+
+                Else
+
+                End If
+
+                Range("friction_coefficient_3") = friction_coefficient_3
+
+            '15. Calculate the pressure loss factor
+
+                length_result_3 = Range("length_3")
+                Range("length_result_3") = length_result_3
+
+                If friction_coefficient_3 <> "N/A" Then
+
+                    pressure_loss_Pa_3 = (friction_coefficient_3 * length_result_3 * density * (velocity_3 ^ 2)) / (2 * internal_diameter_result_3)
+
+                    Range("pressure_loss_Pa_3") = Round(pressure_loss_Pa_3, 2)
+
+                    Range("flow_rate_table_qv_3") = " "
+                    Range("pressure_loss_per_length_table_3") = " "
+
+                Else
+
+                    'Determine the column to look up the number by using the pipe size
+
+                    flow_rate_column = Application.Match(Range("pipe_size_result_3"), Range("pipe_size_table_array"), 0)
+
+                    'which array should be used to determin the row
+
+                    If pipe_size_3 = 6 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe6_array"), -1)
+
+                    ElseIf pipe_size_3 = 8 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe8_array"), -1)
+
+                    ElseIf pipe_size_3 = 10 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe10_array"), -1)
+
+                    ElseIf pipe_size_3 = 12 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe12_array"), -1)
+
+                    ElseIf pipe_size_3 = 15 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe15_array"), -1)
+
+                    ElseIf pipe_size_3 = 22 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe22_array"), -1)
+
+                    ElseIf pipe_size_3 = 28 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe28_array"), -1)
+
+                    ElseIf pipe_size_3 = 35 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe35_array"), -1)
+
+                    ElseIf pipe_size_3 = 42 Then
+                        flow_rate_row = Application.Match(Range("actual_flow_rate"), Range("pipe42_array"), -1)
+
+                    ElseIf pipe_size_3 = 54 Then
+                        flow_rate_row = Application.Match(Range("actual_flow_rate"), Range("pipe54_array"), -1)
+
+                    Else
+
+                    End If
+
+                    flow_rate_table_qv_3 = Application.Index(Range("flow_rate_array"), flow_rate_row, flow_rate_column)
+
+                    Range("flow_rate_table_qv_3") = flow_rate_table_qv_3
+
+                    pressure_loss_per_length_table_3 = Application.Index(Range("pressure_loss_per_length_array"), flow_rate_row, 0)
+
+                    Range("pressure_loss_per_length_table_3") = pressure_loss_per_length_table_3
+
+                    'Pressure Loss
+
+                    pressure_loss_Pa_3 = pressure_loss_per_length_table_3 / length_result_3
+
+                    Range("pressure_loss_Pa_3") = Round(pressure_loss_Pa_3, 2)
+
+                End If
+
+
+Else
+    Range("Pipe3") = " "
+
+End If
+
+'Pipe 4
+
+If Range("pipe_type_4") <> "N/A" Then
+
+            '1. Clear user defined fields
+
+                If Range("pipe_size_4") <> "Other" Then
+
+                    Range("user_defined_pipe_size_4") = " "
+                    Range("user_defined_internal_diameter_4") = " "
+
+                Else
+
+                End If
+
+
+            '2. Determine type of fluid
+
+                fluid_type_4 = Range("fluid_type_4")
+
+                If fluid_type_4 = "Natural Gas" Then
+
+                    dynamic_viscosity = 0.0000107
+
+                    Range("dynamic_viscosity") = dynamic_viscosity
+
+                    density = 0.68
+
+                    Range("density") = density
+
+                Else
+
+                    MsgBox "Only Natural Gas is available at this time"
+                    Exit Sub
+
+                End If
+
+            '3. Determine the pipe material
+
+            'Pipe 1
+
+                pipe_type_4 = Range("pipe_type_4")
+
+                If pipe_type_4 = "Copper, Cu (k = 0.0015)" Then
+
+                    equivalent_roughness_result_4 = 0.0015
+
+                    Range("equivalent_roughness_4") = " "
+
+                ElseIf pipe_type_4 = "Copper, Cu (k = 0.01)" Then
+
+                    equivalent_roughness_result_4 = 0.01
+
+                    Range("equivalent_roughness_4") = " "
+
+                ElseIf pipe_type_4 = "PE (k = 0.000005)" Then
+
+                    equivalent_roughness_result_4 = 0.000005
+
+                    Range("equivalent_roughness_4") = " "
+
+                Else
+
+                    equivalent_roughness_result_4 = Range("equivalent_roughness_4")
+
+                    If IsEmpty(equivalent_roughness_result_4) Then
+
+                        MsgBox "Error: No value in equivalent roughness cell"
+
+                        Exit Sub
+
+                    Else
+
+                    End If
+
+                End If
+
+             Range("pipe_type_results_4") = pipe_type_4
+             Range("equivalent_roughness_result_4") = equivalent_roughness_result_4
+
+
+            'Determine pipe size, internal diameter, internal area.
+
+            '4. Pipe Size
+
+                pipe_size_4 = Range("pipe_size_4")
+
+                If pipe_size_4 = "Other" Then
+
+                    pipe_size_result_4 = Range("user_defined_pipe_size_4")
+
+                Else
+
+                    pipe_size_result_4 = pipe_size_4
+
+                End If
+
+            '5. Internal Diameter
+
+                If pipe_size_4 = "Other" Then
+
+                    internal_diameter_result_4 = Range("user_defined_internal_diameter_4")
+
+                Else
+
+                    internal_diameter_result_4 = Switch(pipe_size_4 = 6, 0.0048, _
+                                       pipe_size_4 = 8, 0.0068, _
+                                       pipe_size_4 = 10, 0.0088, _
+                                       pipe_size_4 = 12, 0.0108, _
+                                       pipe_size_4 = 15, 0.0136, _
+                                       pipe_size_4 = 22, 0.02022, _
+                                       pipe_size_4 = 28, 0.02622, _
+                                       pipe_size_4 = 35, 0.03263, _
+                                       pipe_size_4 = 42, 0.03963, _
+                                       pipe_size_4 = 54, 0.05163)
+
+                End If
+
+                Range("pipe_size_result_4") = pipe_size_result_4
+
+                Range("internal_diameter_result_4") = internal_diameter_result_4
+
+            '6. Internal Area
+
+                internal_area_4 = (Application.Pi() * (internal_diameter_result_4 ^ 2)) / 4
+
+                Range("internal_area_4") = Round(internal_area_4, 6)
+
+            'Determine energy used, vloume of gas, flow rate of gas, actual flow rate
+
+            '7. Energy used
+
+                energy_used_result = Range("energy_used")
+
+                Range("energy_used_result") = energy_used_result
+
+            '8. Volume of gas
+
+                volume_gas_result = energy_used_result / 11
+
+                Range("volume_gas_result") = volume_gas_result
+
+            '9. Flow rate of gas
+
+                flow_rate_of_gas_result = volume_gas_result / 3600
+
+                Range("flow_rate_of_gas") = Round(flow_rate_of_gas_result, 6)
+
+            '10. Actual flow rate
+
+                actual_flow_rate = flow_rate_of_gas_result
+
+                Range("actual_flow_rate") = Round(actual_flow_rate, 6)
+
+            '11. Determine velocity
+
+                velocity_4 = actual_flow_rate / internal_area_4
+
+                Range("velocity_4") = Round(velocity_4, 6)
+
+            '12. Determine Reynolds Number, Type of flow (needs error checking)
+
+                z = density * velocity_4 * internal_diameter_result_4
+
+                reynolds_number_4 = z / dynamic_viscosity
+
+                Range("reynolds_number_4") = Round(reynolds_number_4, 2)
+
+            '13. Determine the type of flow
+
+                If pipe_type_4 = "PE (k = 0.000005)" Or pipe_type_4 = "PE (k = other)" Then
+
+                    type_of_flow_4 = Switch(reynolds_number_4 <= 2000, "Laminar Flow", _
+                                          reynolds_number_4 > 2000, "Turbulent Flow")
+
+                    Range("type_of_flow_4") = type_of_flow_4
+
+                Else
+
+                    type_of_flow_4 = Switch(reynolds_number_4 < 2000, "Laminar Flow", _
+                                      reynolds_number_4 > 3000, "Turbulent Flow", _
+                                      reynolds_number_4 > 2000 And reynolds_number_4 < 3000, "Intermediate Zone")
+
+                    If pipe_size_ <> "Other" Then
+
+                        Range("type_of_flow_4") = type_of_flow_4
+
+                    Else
+
+                        If type_of_flow_4 = "Intermediate Zone" Then
+
+                            MsgBox "Error: Using this pipe size will result in intermediate flow." _
+                            & vbNewLine & "Please select a different pipe size or use a pre-defined size."
+
+                        Else
+
+                        End If
+
+                    End If
+
+                End If
+
+            '14. Determin friction coefficient (lambna)
+
+                friction_coefficient_4 = "N/A"
+
+                If type_of_flow_4 = "Laminar Flow" Then
+
+                    friction_coefficient_4 = 64 / reynolds_number_4
+
+                ElseIf type_of_flow_4 = "Turbulent Flow" Then
+
+                    'Altshul's equation 1st iteration
+
+                    relative_roughness_4 = equivalent_roughness_result_4 / internal_diameter_result_4
+                    Range("relative_roughness_4") = relative_roughness_4
+
+                    a = 0.11 * ((relative_roughness_4 + (68 / reynolds_number_4)) ^ 0.25)
+                    a = Round(a, 5)
+
+                    c = Sqr(a)
+                    c = Round(c, 5)
+
+                    b = 1 / c
+                    b = Round(b, 5)
+
+
+                    'repeat (do) the formula until the numbers converge so that the value is the same til two decimal places.
+
+                    i = 0
+                    m = 0
+                    j = Round(b, 2)
+
+                    Do
+
+                    e = relative_roughness_4 / 3.7
+                    e = Round(e, 5)
+
+                    f = reynolds_number_4 * c
+                    f = Round(f, 5)
+
+                    g = 2.51 / f
+                    g = Round(g, 5)
+
+                    h = ((g) + e)
+                    h = Round(h, 5)
+
+                    d = (-2) * Application.Log(h, 10)
+                    d = Round(d, 5)
+
+                    i = 1 + i
+                    k = Round(d, 2)
+
+                    If j <> k Then
+                    j = k
+                    Else
+                        m = k
+                    End If
+
+                    Loop Until m = j
+
+                n = 1 / (d ^ 2)
+                n = Round(n, 5)
+
+                friction_coefficient_4 = n
+
+
+                Else
+
+                End If
+
+                Range("friction_coefficient_4") = friction_coefficient_4
+
+            '15. Calculate the pressure loss factor
+
+                length_result_4 = Range("length_4")
+                Range("length_result_4") = length_result_4
+
+                If friction_coefficient_4 <> "N/A" Then
+
+                    pressure_loss_Pa_4 = (friction_coefficient_4 * length_result_4 * density * (velocity_4 ^ 2)) / (2 * internal_diameter_result_4)
+
+                    Range("pressure_loss_Pa_4") = Round(pressure_loss_Pa_4, 2)
+
+                    Range("flow_rate_table_qv_4") = " "
+                    Range("pressure_loss_per_length_table_4") = " "
+
+                Else
+
+                    'Determine the column to look up the number by using the pipe size
+
+                    flow_rate_column = Application.Match(Range("pipe_size_result_4"), Range("pipe_size_table_array"), 0)
+
+                    'which array should be used to determin the row
+
+                    If pipe_size_4 = 6 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe6_array"), -1)
+
+                    ElseIf pipe_size_4 = 8 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe8_array"), -1)
+
+                    ElseIf pipe_size_4 = 10 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe10_array"), -1)
+
+                    ElseIf pipe_size_4 = 12 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe12_array"), -1)
+
+                    ElseIf pipe_size_4 = 15 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe15_array"), -1)
+
+                    ElseIf pipe_size_4 = 22 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe22_array"), -1)
+
+                    ElseIf pipe_size_4 = 28 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe28_array"), -1)
+
+                    ElseIf pipe_size_4 = 35 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe35_array"), -1)
+
+                    ElseIf pipe_size_4 = 42 Then
+                        flow_rate_row = Application.Match(Range("actual_flow_rate"), Range("pipe42_array"), -1)
+
+                    ElseIf pipe_size_4 = 54 Then
+                        flow_rate_row = Application.Match(Range("actual_flow_rate"), Range("pipe54_array"), -1)
+
+                    Else
+
+                    End If
+
+                    flow_rate_table_qv_4 = Application.Index(Range("flow_rate_array"), flow_rate_row, flow_rate_column)
+
+                    Range("flow_rate_table_qv_4") = flow_rate_table_qv_4
+
+                    pressure_loss_per_length_table_4 = Application.Index(Range("pressure_loss_per_length_array"), flow_rate_row, 0)
+
+                    Range("pressure_loss_per_length_table_4") = pressure_loss_per_length_table_4
+
+                    'Pressure Loss
+
+                    pressure_loss_Pa_4 = pressure_loss_per_length_table_1 / length_result_4
+
+                    Range("pressure_loss_Pa_4") = Round(pressure_loss_Pa_4, 2)
+
+                End If
+
+
+Else
+    Range("Pipe4") = " "
+
+End If
+
+
+'Pipe 5
+
+If Range("pipe_type_5") <> "N/A" Then
+
+            '1. Clear user defined fields
+
+                If Range("pipe_size_5") <> "Other" Then
+
+                    Range("user_defined_pipe_size_5") = " "
+                    Range("user_defined_internal_diameter_5") = " "
+
+                Else
+
+                End If
+
+
+            '2. Determine type of fluid
+
+                fluid_type_5 = Range("fluid_type_5")
+
+                If fluid_type_5 = "Natural Gas" Then
+
+                    dynamic_viscosity = 0.0000107
+
+                    Range("dynamic_viscosity") = dynamic_viscosity
+
+                    density = 0.68
+
+                    Range("density") = density
+
+                Else
+
+                    MsgBox "Only Natural Gas is available at this time"
+                    Exit Sub
+
+                End If
+
+            '3. Determine the pipe material
+
+            'Pipe 1
+
+                pipe_type_5 = Range("pipe_type_5")
+
+                If pipe_type_5 = "Copper, Cu (k = 0.0015)" Then
+
+                    equivalent_roughness_result_5 = 0.0015
+
+                    Range("equivalent_roughness_5") = " "
+
+                ElseIf pipe_type_5 = "Copper, Cu (k = 0.01)" Then
+
+                    equivalent_roughness_result_5 = 0.01
+
+                    Range("equivalent_roughness_5") = " "
+
+                ElseIf pipe_type_5 = "PE (k = 0.000005)" Then
+
+                    equivalent_roughness_result_5 = 0.000005
+
+                    Range("equivalent_roughness_5") = " "
+
+                Else
+
+                    equivalent_roughness_result_5 = Range("equivalent_roughness_5")
+
+                    If IsEmpty(equivalent_roughness_result_5) Then
+
+                        MsgBox "Error: No value in equivalent roughness cell"
+
+                        Exit Sub
+
+                    Else
+
+                    End If
+
+                End If
+
+             Range("pipe_type_results_5") = pipe_type_5
+             Range("equivalent_roughness_result_5") = equivalent_roughness_result_5
+
+
+            'Determine pipe size, internal diameter, internal area.
+
+            '4. Pipe Size
+
+                pipe_size_5 = Range("pipe_size_5")
+
+                If pipe_size_5 = "Other" Then
+
+                    pipe_size_result_5 = Range("user_defined_pipe_size_5")
+
+                Else
+
+                    pipe_size_result_5 = pipe_size_5
+
+                End If
+
+            '5. Internal Diameter
+
+                If pipe_size_5 = "Other" Then
+
+                    internal_diameter_result_5 = Range("user_defined_internal_diameter_5")
+
+                Else
+
+                    internal_diameter_result_5 = Switch(pipe_size_5 = 6, 0.0048, _
+                                       pipe_size_5 = 8, 0.0068, _
+                                       pipe_size_5 = 10, 0.0088, _
+                                       pipe_size_5 = 12, 0.0108, _
+                                       pipe_size_5 = 15, 0.0136, _
+                                       pipe_size_5 = 22, 0.02022, _
+                                       pipe_size_5 = 28, 0.02622, _
+                                       pipe_size_5 = 35, 0.03263, _
+                                       pipe_size_5 = 42, 0.03963, _
+                                       pipe_size_5 = 54, 0.05163)
+
+                End If
+
+                Range("pipe_size_result_5") = pipe_size_result_5
+
+                Range("internal_diameter_result_5") = internal_diameter_result_5
+
+            '6. Internal Area
+
+                internal_area_5 = (Application.Pi() * (internal_diameter_result_5 ^ 2)) / 4
+
+                Range("internal_area_5") = Round(internal_area_5, 6)
+
+            'Determine energy used, vloume of gas, flow rate of gas, actual flow rate
+
+            '7. Energy used
+
+                energy_used_result = Range("energy_used")
+
+                Range("energy_used_result") = energy_used_result
+
+            '8. Volume of gas
+
+                volume_gas_result = energy_used_result / 11
+
+                Range("volume_gas_result") = volume_gas_result
+
+            '9. Flow rate of gas
+
+                flow_rate_of_gas_result = volume_gas_result / 3600
+
+                Range("flow_rate_of_gas") = Round(flow_rate_of_gas_result, 6)
+
+            '10. Actual flow rate
+
+                actual_flow_rate = flow_rate_of_gas_result
+
+                Range("actual_flow_rate") = Round(actual_flow_rate, 6)
+
+            '11. Determine velocity
+
+                velocity_5 = actual_flow_rate / internal_area_5
+
+                Range("velocity_5") = Round(velocity_5, 6)
+
+            '12. Determine Reynolds Number, Type of flow (needs error checking)
+
+                z = density * velocity_5 * internal_diameter_result_5
+
+                reynolds_number_5 = z / dynamic_viscosity
+
+                Range("reynolds_number_5") = Round(reynolds_number_5, 2)
+
+            '13. Determine the type of flow
+
+                If pipe_type_5 = "PE (k = 0.000005)" Or pipe_type_5 = "PE (k = other)" Then
+
+                    type_of_flow_5 = Switch(reynolds_number_5 <= 2000, "Laminar Flow", _
+                                          reynolds_number_5 > 2000, "Turbulent Flow")
+
+                    Range("type_of_flow_5") = type_of_flow_5
+
+                Else
+
+                    type_of_flow_5 = Switch(reynolds_number_5 < 2000, "Laminar Flow", _
+                                      reynolds_number_5 > 3000, "Turbulent Flow", _
+                                      reynolds_number_5 > 2000 And reynolds_number_5 < 3000, "Intermediate Zone")
+
+                    If pipe_size_ <> "Other" Then
+
+                        Range("type_of_flow_5") = type_of_flow_5
+
+                    Else
+
+                        If type_of_flow_5 = "Intermediate Zone" Then
+
+                            MsgBox "Error: Using this pipe size will result in intermediate flow." _
+                            & vbNewLine & "Please select a different pipe size or use a pre-defined size."
+
+                        Else
+
+                        End If
+
+                    End If
+
+                End If
+
+            '14. Determin friction coefficient (lambna)
+
+                friction_coefficient_5 = "N/A"
+
+                If type_of_flow_5 = "Laminar Flow" Then
+
+                    friction_coefficient_5 = 64 / reynolds_number_5
+
+                ElseIf type_of_flow_5 = "Turbulent Flow" Then
+
+                    'Altshul's equation 1st iteration
+
+                    relative_roughness_5 = equivalent_roughness_result_5 / internal_diameter_result_5
+                    Range("relative_roughness_5") = relative_roughness_5
+
+                    a = 0.11 * ((relative_roughness_5 + (68 / reynolds_number_5)) ^ 0.25)
+                    a = Round(a, 5)
+
+                    c = Sqr(a)
+                    c = Round(c, 5)
+
+                    b = 1 / c
+                    b = Round(b, 5)
+
+
+                    'repeat (do) the formula until the numbers converge so that the value is the same til two decimal places.
+
+                    i = 0
+                    m = 0
+                    j = Round(b, 2)
+
+                    Do
+
+                    e = relative_roughness_5 / 3.7
+                    e = Round(e, 5)
+
+                    f = reynolds_number_5 * c
+                    f = Round(f, 5)
+
+                    g = 2.51 / f
+                    g = Round(g, 5)
+
+                    h = ((g) + e)
+                    h = Round(h, 5)
+
+                    d = (-2) * Application.Log(h, 10)
+                    d = Round(d, 5)
+
+                    i = 1 + i
+                    k = Round(d, 2)
+
+                    If j <> k Then
+                    j = k
+                    Else
+                        m = k
+                    End If
+
+                    Loop Until m = j
+
+                n = 1 / (d ^ 2)
+                n = Round(n, 5)
+
+                friction_coefficient_5 = n
+
+                Else
+
+                End If
+
+                Range("friction_coefficient_5") = friction_coefficient_5
+
+            '15. Calculate the pressure loss factor
+
+                length_result_5 = Range("length_5")
+                Range("length_result_5") = length_result_5
+
+                If friction_coefficient_5 <> "N/A" Then
+
+                    pressure_loss_Pa_5 = (friction_coefficient_5 * length_result_5 * density * (velocity_5 ^ 2)) / (2 * internal_diameter_result_5)
+
+                    Range("pressure_loss_Pa_5") = Round(pressure_loss_Pa_5, 2)
+
+                    Range("flow_rate_table_qv_5") = " "
+                    Range("pressure_loss_per_length_table_5") = " "
+
+                Else
+
+                    'Determine the column to look up the number by using the pipe size
+
+                    flow_rate_column = Application.Match(Range("pipe_size_result_5"), Range("pipe_size_table_array"), 0)
+
+                    'which array should be used to determin the row
+
+                    If pipe_size_5 = 6 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe6_array"), -1)
+
+                    ElseIf pipe_size_5 = 8 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe8_array"), -1)
+
+                    ElseIf pipe_size_5 = 10 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe10_array"), -1)
+
+                    ElseIf pipe_size_5 = 12 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe12_array"), -1)
+
+                    ElseIf pipe_size_5 = 15 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe15_array"), -1)
+
+                    ElseIf pipe_size_5 = 22 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe22_array"), -1)
+
+                    ElseIf pipe_size_5 = 28 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe28_array"), -1)
+
+                    ElseIf pipe_size_5 = 35 Then
+                        flow_rate_row = Application.Match(actual_flow_rate, Range("pipe35_array"), -1)
+
+                    ElseIf pipe_size_5 = 42 Then
+                        flow_rate_row = Application.Match(Range("actual_flow_rate"), Range("pipe42_array"), -1)
+
+                    ElseIf pipe_size_5 = 54 Then
+                        flow_rate_row = Application.Match(Range("actual_flow_rate"), Range("pipe54_array"), -1)
+
+                    Else
+
+                    End If
+
+                    flow_rate_table_qv_5 = Application.Index(Range("flow_rate_array"), flow_rate_row, flow_rate_column)
+
+                    Range("flow_rate_table_qv_5") = flow_rate_table_qv_5
+
+                    pressure_loss_per_length_table_5 = Application.Index(Range("pressure_loss_per_length_array"), flow_rate_row, 0)
+
+                    Range("pressure_loss_per_length_table_5") = pressure_loss_per_length_table_5
+
+                    pressure_loss_Pa_5 = pressure_loss_per_length_table_1 / length_result_5
+
+                    Range("pressure_loss_Pa_5") = Round(pressure_loss_Pa_5, 2)
+
+                End If
+
+Else
+    Range("Pipe5") = " "
+
+End If
+
+
+        pressure_loss_millibar_1 = pressure_loss_Pa_1 / 100
+        Range("pressure_loss_millibar_1") = Round(pressure_loss_millibar_1, 2)
+
+        pressure_loss_millibar_2 = pressure_loss_Pa_2 / 100
+        Range("pressure_loss_millibar_2") = Round(pressure_loss_millibar_2, 2)
+
+        pressure_loss_millibar_3 = pressure_loss_Pa_3 / 100
+        Range("pressure_loss_millibar_3") = Round(pressure_loss_millibar_3, 2)
+
+        pressure_loss_millibar_4 = pressure_loss_Pa_4 / 100
+        Range("pressure_loss_millibar_4") = Round(pressure_loss_millibar_4, 2)
+
+        pressure_loss_millibar_5 = pressure_loss_Pa_5 / 100
+        Range("pressure_loss_millibar_5") = Round(pressure_loss_millibar_5, 2)
+
+Worksheets("Results").Activate
+
+End Sub
+
+Sub list()
+
+    Dim Type1
+    Dim Type2
+    Dim Type3
+    Dim Type4
+    Dim Type5
+
+    Dim diameter1
+    Dim diameter2
+    Dim diameter3
+    Dim diameter4
+    Dim diameter5
+
+    Dim amount1
+    Dim amount2
+    Dim amount3
+    Dim amount4
+    Dim amount5
+
+    Dim dr_1
+    Dim dr_2
+    Dim dr_3
+    Dim dr_4
+    Dim dr_5
+
+    Dim degree1
+    Dim degree2
+    Dim degree3
+    Dim degree4
+    Dim degree5
+
+    Dim frr_1
+    Dim frr_2
+    Dim frr_3
+    Dim frr_4
+    Dim frr_5
+
+    Dim vr_1
+    Dim vr_2
+    Dim vr_3
+    Dim vr_4
+    Dim vr_5
+
+    Type1 = Range("Type1")
+    Type2 = Range("Type2")
+    Type3 = Range("Type3")
+    Type4 = Range("Type4")
+    Type5 = Range("Type5")
+
+    Range("fitting_selection_array").Validation.Delete
+    Range("fitting_selection_array").ClearContents
+    Range("fitting_selection_array").Interior.ColorIndex = xlNone
+    Range("PC_array").Interior.ColorIndex = xlNone
+
+    If Type1 <> "N/A" Then
+
+        If Type1 Like "Elbow*" Then
+
+            With Range("diameter1").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=elbows_diameter_array"
+            End With
+
+            With Range("amount1").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_1").Interior.color = RGB(217, 217, 217)
+            Range("frr_1").Interior.color = RGB(217, 217, 217)
+            Range("vr_1").Interior.color = RGB(217, 217, 217)
+            Range("degree1").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type1 = "Bend" Then
+
+            With Range("diameter1").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=bend_diameter_array"
+            End With
+
+            With Range("amount1").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_1").Interior.color = RGB(217, 217, 217)
+            Range("frr_1").Interior.color = RGB(217, 217, 217)
+            Range("vr_1").Interior.color = RGB(217, 217, 217)
+            Range("degree1").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type1 = "Reducer" Then
+
+            With Range("diameter1").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=reducer_diameter_array"
+            End With
+
+            With Range("amount1").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_1").Interior.color = RGB(217, 217, 217)
+            Range("frr_1").Interior.color = RGB(217, 217, 217)
+            Range("vr_1").Interior.color = RGB(217, 217, 217)
+            Range("degree1").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type1 = "Expander" Then
+
+            With Range("diameter1").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=expander_diameter_array"
+            End With
+
+            With Range("amount1").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_1").Interior.color = RGB(217, 217, 217)
+            Range("frr_1").Interior.color = RGB(217, 217, 217)
+            Range("vr_1").Interior.color = RGB(217, 217, 217)
+            Range("degree1").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type1 Like "Standard*" Then
+
+            With Range("diameter1").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=standard_globe_diameter_array"
+            End With
+
+            With Range("amount1").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_1").Interior.color = RGB(217, 217, 217)
+            Range("frr_1").Interior.color = RGB(217, 217, 217)
+            Range("vr_1").Interior.color = RGB(217, 217, 217)
+            Range("degree1").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type1 Like "Angle*" Then
+
+            With Range("diameter1").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=angle_globe_diameter_array"
+            End With
+
+            With Range("amount1").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_1").Interior.color = RGB(217, 217, 217)
+            Range("frr_1").Interior.color = RGB(217, 217, 217)
+            Range("vr_1").Interior.color = RGB(217, 217, 217)
+            Range("degree1").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type1 Like "Non*" Then
+
+            With Range("degree1").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=nr_degrees_array"
+            End With
+
+            With Range("amount1").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("diameter1").Interior.color = RGB(217, 217, 217)
+            Range("dr_1").Interior.color = RGB(217, 217, 217)
+            Range("frr_1").Interior.color = RGB(217, 217, 217)
+            Range("vr_1").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type1 = "T-Junction A" Then
+
+            With Range("dr_1").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=dbdc_a_array"
+            End With
+
+            With Range("amount1").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_1").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_a_array"
+            End With
+
+            Range("diameter1").Interior.color = RGB(217, 217, 217)
+            Range("degree1").Interior.color = RGB(217, 217, 217)
+            Range("vr_1").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type1 = "T-Junction B" Then
+
+            With Range("amount1").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_1").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_b_array"
+            End With
+
+            Range("diameter1").Interior.color = RGB(217, 217, 217)
+            Range("degree1").Interior.color = RGB(217, 217, 217)
+            Range("vr_1").Interior.color = RGB(217, 217, 217)
+            Range("dr_1").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type1 = "T-Junction C" Then
+
+            With Range("dr_1").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=d1dc_c_array"
+            End With
+
+            With Range("amount1").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_1").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=q1qc_c_array"
+            End With
+
+            Range("diameter1").Interior.color = RGB(217, 217, 217)
+            Range("degree1").Interior.color = RGB(217, 217, 217)
+            Range("vr_1").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type1 = "T-Junction D" Then
+
+            With Range("dr_1").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=dbdc_d_array"
+            End With
+
+            With Range("amount1").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_1").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_d_array"
+            End With
+
+            Range("diameter1").Interior.color = RGB(217, 217, 217)
+            Range("degree1").Interior.color = RGB(217, 217, 217)
+            Range("vr_1").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type1 = "T-Junction E" Then
+
+            With Range("amount1").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_1").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_e_array"
+            End With
+
+            Range("diameter1").Interior.color = RGB(217, 217, 217)
+            Range("degree1").Interior.color = RGB(217, 217, 217)
+            Range("vr_1").Interior.color = RGB(217, 217, 217)
+            Range("dr_1").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type1 = "T-Junction F1" Then
+
+            With Range("amount1").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("vr_1").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=cc_f_array"
+            End With
+
+            Range("diameter1").Interior.color = RGB(217, 217, 217)
+            Range("degree1").Interior.color = RGB(217, 217, 217)
+            Range("frr_1").Interior.color = RGB(217, 217, 217)
+            Range("dr_1").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type1 = "T-Junction F2" Then
+
+            With Range("amount1").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("vr_1").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=cc_f_array"
+            End With
+
+            Range("diameter1").Interior.color = RGB(217, 217, 217)
+            Range("degree1").Interior.color = RGB(217, 217, 217)
+            Range("frr_1").Interior.color = RGB(217, 217, 217)
+            Range("dr_1").Interior.color = RGB(217, 217, 217)
+
+                ElseIf Type1 = "T-Junction F1" Then
+
+            With Range("amount1").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("diameter1").Interior.color = RGB(217, 217, 217)
+            Range("degree1").Interior.color = RGB(217, 217, 217)
+            Range("frr_1").Interior.color = RGB(217, 217, 217)
+            Range("dr_1").Interior.color = RGB(217, 217, 217)
+            Range("vr_1").Interior.color = RGB(217, 217, 217)
+
+        Else
+        End If
+
+    Else
+
+        Range("diameter1").Validation.Delete
+        Range("PC_1").Validation.Delete
+        Range("amount1").Validation.Delete
+        Range("dr_1").Validation.Delete
+        Range("frr_1").Validation.Delete
+        Range("vr_1").Validation.Delete
+        Range("degree1").Validation.Delete
+
+        Range("diameter1").ClearContents
+        Range("PC_1").ClearContents
+        Range("amount1").ClearContents
+        Range("degree1").ClearContents
+        Range("dr_1").ClearContents
+        Range("frr_1").ClearContents
+        Range("vr_1").ClearContents
+
+        Range("diameter1").Interior.color = RGB(217, 217, 217)
+        Range("PC_1").Interior.color = RGB(217, 217, 217)
+        Range("amount1").Interior.color = RGB(217, 217, 217)
+        Range("dr_1").Interior.color = RGB(217, 217, 217)
+        Range("frr_1").Interior.color = RGB(217, 217, 217)
+        Range("vr_1").Interior.color = RGB(217, 217, 217)
+        Range("degree1").Interior.color = RGB(217, 217, 217)
+
+    End If
+
+
+        If Type2 <> "N/A" Then
+
+        If Type2 Like "Elbow*" Then
+
+            With Range("diameter2").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=elbows_diameter_array"
+            End With
+
+            With Range("amount2").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_2").Interior.color = RGB(217, 217, 217)
+            Range("frr_2").Interior.color = RGB(217, 217, 217)
+            Range("vr_2").Interior.color = RGB(217, 217, 217)
+            Range("degree2").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type2 = "Bend" Then
+
+            With Range("diameter2").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=bend_diameter_array"
+            End With
+
+            With Range("amount2").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_2").Interior.color = RGB(217, 217, 217)
+            Range("frr_2").Interior.color = RGB(217, 217, 217)
+            Range("vr_2").Interior.color = RGB(217, 217, 217)
+            Range("degree2").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type2 = "Reducer" Then
+
+            With Range("diameter2").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=reducer_diameter_array"
+            End With
+
+            With Range("amount2").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_2").Interior.color = RGB(217, 217, 217)
+            Range("frr_2").Interior.color = RGB(217, 217, 217)
+            Range("vr_2").Interior.color = RGB(217, 217, 217)
+            Range("degree2").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type2 = "Expander" Then
+
+            With Range("diameter2").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=expander_diameter_array"
+            End With
+
+            With Range("amount2").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_2").Interior.color = RGB(217, 217, 217)
+            Range("frr_2").Interior.color = RGB(217, 217, 217)
+            Range("vr_2").Interior.color = RGB(217, 217, 217)
+            Range("degree2").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type2 Like "Standard*" Then
+
+            With Range("diameter2").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=standard_globe_diameter_array"
+            End With
+
+            With Range("amount2").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_2").Interior.color = RGB(217, 217, 217)
+            Range("frr_2").Interior.color = RGB(217, 217, 217)
+            Range("vr_2").Interior.color = RGB(217, 217, 217)
+            Range("degree2").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type2 Like "Angle*" Then
+
+            With Range("diameter2").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=angle_globe_diameter_array"
+            End With
+
+            With Range("amount2").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_2").Interior.color = RGB(217, 217, 217)
+            Range("frr_2").Interior.color = RGB(217, 217, 217)
+            Range("vr_2").Interior.color = RGB(217, 217, 217)
+            Range("degree2").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type2 Like "Non*" Then
+
+            With Range("degree2").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=nr_degrees_array"
+            End With
+
+            With Range("amount2").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("diameter2").Interior.color = RGB(217, 217, 217)
+            Range("dr_2").Interior.color = RGB(217, 217, 217)
+            Range("frr_2").Interior.color = RGB(217, 217, 217)
+            Range("vr_2").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type2 = "T-Junction A" Then
+
+            With Range("dr_2").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=dbdc_a_array"
+            End With
+
+            With Range("amount2").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_2").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_a_array"
+            End With
+
+            Range("diameter2").Interior.color = RGB(217, 217, 217)
+            Range("degree2").Interior.color = RGB(217, 217, 217)
+            Range("vr_2").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type2 = "T-Junction B" Then
+
+            With Range("amount1").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_2").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_b_array"
+            End With
+
+            Range("diameter2").Interior.color = RGB(217, 217, 217)
+            Range("degree2").Interior.color = RGB(217, 217, 217)
+            Range("vr_2").Interior.color = RGB(217, 217, 217)
+            Range("dr_2").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type2 = "T-Junction C" Then
+
+            With Range("dr_2").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=d1dc_c_array"
+            End With
+
+            With Range("amount2").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_2").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=q1qc_c_array"
+            End With
+
+            Range("diameter2").Interior.color = RGB(217, 217, 217)
+            Range("degree1").Interior.color = RGB(217, 217, 217)
+            Range("vr_2").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type2 = "T-Junction D" Then
+
+            With Range("dr_1").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=dbdc_d_array"
+            End With
+
+            With Range("amount2").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_2").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_d_array"
+            End With
+
+            Range("diameter2").Interior.color = RGB(217, 217, 217)
+            Range("degree2").Interior.color = RGB(217, 217, 217)
+            Range("vr_2").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type2 = "T-Junction E" Then
+
+            With Range("amount2").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_2").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_e_array"
+            End With
+
+            Range("diameter2").Interior.color = RGB(217, 217, 217)
+            Range("degree2").Interior.color = RGB(217, 217, 217)
+            Range("vr_2").Interior.color = RGB(217, 217, 217)
+            Range("dr_2").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type2 = "T-Junction F1" Then
+
+            With Range("amount2").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("vr_2").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=cc_f_array"
+            End With
+
+            Range("diameter2").Interior.color = RGB(217, 217, 217)
+            Range("degree2").Interior.color = RGB(217, 217, 217)
+            Range("frr_2").Interior.color = RGB(217, 217, 217)
+            Range("dr_2").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type2 = "T-Junction F2" Then
+
+            With Range("amount2").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("vr_2").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=cc_f_array"
+            End With
+
+            Range("diameter2").Interior.color = RGB(217, 217, 217)
+            Range("degree2").Interior.color = RGB(217, 217, 217)
+            Range("frr_2").Interior.color = RGB(217, 217, 217)
+            Range("dr_2").Interior.color = RGB(217, 217, 217)
+
+
+        Else
+        End If
+
+    Else
+
+        Range("diameter2").Validation.Delete
+        Range("PC_2").Validation.Delete
+        Range("amount2").Validation.Delete
+        Range("dr_2").Validation.Delete
+        Range("frr_2").Validation.Delete
+        Range("vr_2").Validation.Delete
+        Range("degree2").Validation.Delete
+
+        Range("diameter2").ClearContents
+        Range("PC_2").ClearContents
+        Range("amount2").ClearContents
+        Range("degree2").ClearContents
+        Range("dr_2").ClearContents
+        Range("frr_2").ClearContents
+        Range("vr_2").ClearContents
+
+        Range("diameter2").Interior.color = RGB(217, 217, 217)
+        Range("PC_2").Interior.color = RGB(217, 217, 217)
+        Range("amount2").Interior.color = RGB(217, 217, 217)
+        Range("dr_2").Interior.color = RGB(217, 217, 217)
+        Range("frr_2").Interior.color = RGB(217, 217, 217)
+        Range("vr_2").Interior.color = RGB(217, 217, 217)
+        Range("degree2").Interior.color = RGB(217, 217, 217)
+
+    End If
+
+        If Type3 <> "N/A" Then
+
+        If Type3 Like "Elbow*" Then
+
+            With Range("diameter3").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=elbows_diameter_array"
+            End With
+
+            With Range("amount3").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_3").Interior.color = RGB(217, 217, 217)
+            Range("frr_3").Interior.color = RGB(217, 217, 217)
+            Range("vr_3").Interior.color = RGB(217, 217, 217)
+            Range("degree3").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type3 = "Bend" Then
+
+            With Range("diameter3").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=bend_diameter_array"
+            End With
+
+            With Range("amount3").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_3").Interior.color = RGB(217, 217, 217)
+            Range("frr_3").Interior.color = RGB(217, 217, 217)
+            Range("vr_3").Interior.color = RGB(217, 217, 217)
+            Range("degree3").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type3 = "Reducer" Then
+
+            With Range("diameter3").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=reducer_diameter_array"
+            End With
+
+            With Range("amount3").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_3").Interior.color = RGB(217, 217, 217)
+            Range("frr_3").Interior.color = RGB(217, 217, 217)
+            Range("vr_3").Interior.color = RGB(217, 217, 217)
+            Range("degree3").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type3 = "Expander" Then
+
+            With Range("diameter3").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=expander_diameter_array"
+            End With
+
+            With Range("amount3").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_3").Interior.color = RGB(217, 217, 217)
+            Range("frr_3").Interior.color = RGB(217, 217, 217)
+            Range("vr_3").Interior.color = RGB(217, 217, 217)
+            Range("degree3").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type3 Like "Standard*" Then
+
+            With Range("diameter3").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=standard_globe_diameter_array"
+            End With
+
+            With Range("amount3").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_3").Interior.color = RGB(217, 217, 217)
+            Range("frr_3").Interior.color = RGB(217, 217, 217)
+            Range("vr_3").Interior.color = RGB(217, 217, 217)
+            Range("degree3").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type3 Like "Angle*" Then
+
+            With Range("diameter3").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=angle_globe_diameter_array"
+            End With
+
+            With Range("amount3").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_3").Interior.color = RGB(217, 217, 217)
+            Range("frr_3").Interior.color = RGB(217, 217, 217)
+            Range("vr_3").Interior.color = RGB(217, 217, 217)
+            Range("degree3").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type3 Like "Non*" Then
+
+            With Range("degree3").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=nr_degrees_array"
+            End With
+
+            With Range("amount3").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("diameter3").Interior.color = RGB(217, 217, 217)
+            Range("dr_3").Interior.color = RGB(217, 217, 217)
+            Range("frr_3").Interior.color = RGB(217, 217, 217)
+            Range("vr_3").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type3 = "T-Junction A" Then
+
+            With Range("dr_3").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=dbdc_a_array"
+            End With
+
+            With Range("amount3").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_3").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_a_array"
+            End With
+
+            Range("diameter3").Interior.color = RGB(217, 217, 217)
+            Range("degree3").Interior.color = RGB(217, 217, 217)
+            Range("vr_3").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type3 = "T-Junction B" Then
+
+            With Range("amount3").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_3").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_b_array"
+            End With
+
+            Range("diameter3").Interior.color = RGB(217, 217, 217)
+            Range("degree3").Interior.color = RGB(217, 217, 217)
+            Range("vr_3").Interior.color = RGB(217, 217, 217)
+            Range("dr_3").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type3 = "T-Junction C" Then
+
+            With Range("dr_3").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=d1dc_c_array"
+            End With
+
+            With Range("amount3").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_3").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=q1qc_c_array"
+            End With
+
+            Range("diameter3").Interior.color = RGB(217, 217, 217)
+            Range("degree3").Interior.color = RGB(217, 217, 217)
+            Range("vr_3").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type3 = "T-Junction D" Then
+
+            With Range("dr_3").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=dbdc_d_array"
+            End With
+
+            With Range("amount3").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_3").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_d_array"
+            End With
+
+            Range("diameter3").Interior.color = RGB(217, 217, 217)
+            Range("degree3").Interior.color = RGB(217, 217, 217)
+            Range("vr_3").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type3 = "T-Junction E" Then
+
+            With Range("amount3").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_3").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_e_array"
+            End With
+
+            Range("diameter3").Interior.color = RGB(217, 217, 217)
+            Range("degree3").Interior.color = RGB(217, 217, 217)
+            Range("vr_3").Interior.color = RGB(217, 217, 217)
+            Range("dr_3").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type3 = "T-Junction F1" Then
+
+            With Range("amount3").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("vr_3").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=cc_f_array"
+            End With
+
+            Range("diameter3").Interior.color = RGB(217, 217, 217)
+            Range("degree3").Interior.color = RGB(217, 217, 217)
+            Range("frr_3").Interior.color = RGB(217, 217, 217)
+            Range("dr_3").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type3 = "T-Junction F2" Then
+
+            With Range("amount3").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("vr_3").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=cc_f_array"
+            End With
+
+            Range("diameter3").Interior.color = RGB(217, 217, 217)
+            Range("degree3").Interior.color = RGB(217, 217, 217)
+            Range("frr_3").Interior.color = RGB(217, 217, 217)
+            Range("dr_3").Interior.color = RGB(217, 217, 217)
+
+        Else
+        End If
+
+    Else
+
+        Range("diameter3").Validation.Delete
+        Range("PC_3").Validation.Delete
+        Range("amount3").Validation.Delete
+        Range("dr_3").Validation.Delete
+        Range("frr_3").Validation.Delete
+        Range("vr_3").Validation.Delete
+        Range("degree3").Validation.Delete
+
+        Range("diameter3").ClearContents
+        Range("PC_3").ClearContents
+        Range("amount3").ClearContents
+        Range("degree3").ClearContents
+        Range("dr_3").ClearContents
+        Range("frr_3").ClearContents
+        Range("vr_3").ClearContents
+
+        Range("diameter3").Interior.color = RGB(217, 217, 217)
+        Range("PC_3").Interior.color = RGB(217, 217, 217)
+        Range("amount3").Interior.color = RGB(217, 217, 217)
+        Range("dr_3").Interior.color = RGB(217, 217, 217)
+        Range("frr_3").Interior.color = RGB(217, 217, 217)
+        Range("vr_3").Interior.color = RGB(217, 217, 217)
+        Range("degree3").Interior.color = RGB(217, 217, 217)
+
+
+
+    End If
+
+        If Type4 <> "N/A" Then
+
+        If Type4 Like "Elbow*" Then
+
+            With Range("diameter4").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=elbows_diameter_array"
+            End With
+
+            With Range("amount4").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_4").Interior.color = RGB(217, 217, 217)
+            Range("frr_4").Interior.color = RGB(217, 217, 217)
+            Range("vr_4").Interior.color = RGB(217, 217, 217)
+            Range("degree4").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type4 = "Bend" Then
+
+            With Range("diameter4").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=bend_diameter_array"
+            End With
+
+            With Range("amount4").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_4").Interior.color = RGB(217, 217, 217)
+            Range("frr_4").Interior.color = RGB(217, 217, 217)
+            Range("vr_4").Interior.color = RGB(217, 217, 217)
+            Range("degree4").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type4 = "Reducer" Then
+
+            With Range("diameter4").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=reducer_diameter_array"
+            End With
+
+            With Range("amount4").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_4").Interior.color = RGB(217, 217, 217)
+            Range("frr_4").Interior.color = RGB(217, 217, 217)
+            Range("vr_4").Interior.color = RGB(217, 217, 217)
+            Range("degree4").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type4 = "Expander" Then
+
+            With Range("diameter4").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=expander_diameter_array"
+            End With
+
+            With Range("amount4").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_4").Interior.color = RGB(217, 217, 217)
+            Range("frr_4").Interior.color = RGB(217, 217, 217)
+            Range("vr_4").Interior.color = RGB(217, 217, 217)
+            Range("degree4").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type4 Like "Standard*" Then
+
+            With Range("diameter4").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=standard_globe_diameter_array"
+            End With
+
+            With Range("amount4").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_4").Interior.color = RGB(217, 217, 217)
+            Range("frr_4").Interior.color = RGB(217, 217, 217)
+            Range("vr_4").Interior.color = RGB(217, 217, 217)
+            Range("degree4").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type4 Like "Angle*" Then
+
+            With Range("diameter4").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=angle_globe_diameter_array"
+            End With
+
+            With Range("amount4").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_4").Interior.color = RGB(217, 217, 217)
+            Range("frr_4").Interior.color = RGB(217, 217, 217)
+            Range("vr_4").Interior.color = RGB(217, 217, 217)
+            Range("degree4").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type4 Like "Non*" Then
+
+            With Range("degree4").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=nr_degrees_array"
+            End With
+
+            With Range("amount4").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("diameter4").Interior.color = RGB(217, 217, 217)
+            Range("dr_4").Interior.color = RGB(217, 217, 217)
+            Range("frr_4").Interior.color = RGB(217, 217, 217)
+            Range("vr_4").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type4 = "T-Junction A" Then
+
+            With Range("dr_4").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=dbdc_a_array"
+            End With
+
+            With Range("amount4").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_4").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_a_array"
+            End With
+
+            Range("diameter4").Interior.color = RGB(217, 217, 217)
+            Range("degree4").Interior.color = RGB(217, 217, 217)
+            Range("vr_4").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type4 = "T-Junction B" Then
+
+            With Range("amount4").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_4").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_b_array"
+            End With
+
+            Range("diameter4").Interior.color = RGB(217, 217, 217)
+            Range("degree4").Interior.color = RGB(217, 217, 217)
+            Range("vr_4").Interior.color = RGB(217, 217, 217)
+            Range("dr_4").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type4 = "T-Junction C" Then
+
+            With Range("dr_4").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=d1dc_c_array"
+            End With
+
+            With Range("amount4").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_4").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=q1qc_c_array"
+            End With
+
+            Range("diameter4").Interior.color = RGB(217, 217, 217)
+            Range("degree4").Interior.color = RGB(217, 217, 217)
+            Range("vr_4").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type4 = "T-Junction D" Then
+
+            With Range("dr_4").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=dbdc_d_array"
+            End With
+
+            With Range("amount4").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_4").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_d_array"
+            End With
+
+            Range("diameter4").Interior.color = RGB(217, 217, 217)
+            Range("degree4").Interior.color = RGB(217, 217, 217)
+            Range("vr_4").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type4 = "T-Junction E" Then
+
+            With Range("amount4").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_4").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_e_array"
+            End With
+
+            Range("diameter4").Interior.color = RGB(217, 217, 217)
+            Range("degree4").Interior.color = RGB(217, 217, 217)
+            Range("vr_4").Interior.color = RGB(217, 217, 217)
+            Range("dr_4").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type4 = "T-Junction F1" Then
+
+            With Range("amount4").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("vr_4").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=cc_f_array"
+            End With
+
+            Range("diameter4").Interior.color = RGB(217, 217, 217)
+            Range("degree4").Interior.color = RGB(217, 217, 217)
+            Range("frr_4").Interior.color = RGB(217, 217, 217)
+            Range("dr_4").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type4 = "T-Junction F2" Then
+
+            With Range("amount4").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("vr_4").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=cc_f_array"
+            End With
+
+            Range("diameter4").Interior.color = RGB(217, 217, 217)
+            Range("degree4").Interior.color = RGB(217, 217, 217)
+            Range("frr_4").Interior.color = RGB(217, 217, 217)
+            Range("dr_4").Interior.color = RGB(217, 217, 217)
+
+        Else
+        End If
+
+    Else
+
+        Range("diameter4").Validation.Delete
+        Range("PC_4").Validation.Delete
+        Range("amount4").Validation.Delete
+        Range("dr_4").Validation.Delete
+        Range("frr_4").Validation.Delete
+        Range("vr_4").Validation.Delete
+        Range("degree4").Validation.Delete
+
+        Range("diameter4").ClearContents
+        Range("PC_4").ClearContents
+        Range("amount4").ClearContents
+        Range("degree4").ClearContents
+        Range("dr_4").ClearContents
+        Range("frr_4").ClearContents
+        Range("vr_4").ClearContents
+
+        Range("diameter4").Interior.color = RGB(217, 217, 217)
+        Range("PC_4").Interior.color = RGB(217, 217, 217)
+        Range("amount4").Interior.color = RGB(217, 217, 217)
+        Range("dr_4").Interior.color = RGB(217, 217, 217)
+        Range("frr_4").Interior.color = RGB(217, 217, 217)
+        Range("vr_4").Interior.color = RGB(217, 217, 217)
+        Range("degree4").Interior.color = RGB(217, 217, 217)
+
+    End If
+
+        If Type5 <> "N/A" Then
+
+        If Type5 Like "Elbow*" Then
+
+            With Range("diameter5").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=elbows_diameter_array"
+            End With
+
+            With Range("amount5").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_5").Interior.color = RGB(217, 217, 217)
+            Range("frr_5").Interior.color = RGB(217, 217, 217)
+            Range("vr_5").Interior.color = RGB(217, 217, 217)
+            Range("degree5").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type5 = "Bend" Then
+
+            With Range("diameter5").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=bend_diameter_array"
+            End With
+
+            With Range("amount5").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_5").Interior.color = RGB(217, 217, 217)
+            Range("frr_5").Interior.color = RGB(217, 217, 217)
+            Range("vr_5").Interior.color = RGB(217, 217, 217)
+            Range("degree5").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type5 = "Reducer" Then
+
+            With Range("diameter5").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=reducer_diameter_array"
+            End With
+
+            With Range("amount5").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_5").Interior.color = RGB(217, 217, 217)
+            Range("frr_5").Interior.color = RGB(217, 217, 217)
+            Range("vr_5").Interior.color = RGB(217, 217, 217)
+            Range("degree5").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type5 = "Expander" Then
+
+            With Range("diameter5").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=expander_diameter_array"
+            End With
+
+            With Range("amount5").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_5").Interior.color = RGB(217, 217, 217)
+            Range("frr_5").Interior.color = RGB(217, 217, 217)
+            Range("vr_5").Interior.color = RGB(217, 217, 217)
+            Range("degree5").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type5 Like "Standard*" Then
+
+            With Range("diameter5").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=standard_globe_diameter_array"
+            End With
+
+            With Range("amount5").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_5").Interior.color = RGB(217, 217, 217)
+            Range("frr_5").Interior.color = RGB(217, 217, 217)
+            Range("vr_5").Interior.color = RGB(217, 217, 217)
+            Range("degree5").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type5 Like "Angle*" Then
+
+            With Range("diameter5").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=angle_globe_diameter_array"
+            End With
+
+            With Range("amount5").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("dr_5").Interior.color = RGB(217, 217, 217)
+            Range("frr_5").Interior.color = RGB(217, 217, 217)
+            Range("vr_5").Interior.color = RGB(217, 217, 217)
+            Range("degree5").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type5 Like "Non*" Then
+
+            With Range("degree5").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=nr_degrees_array"
+            End With
+
+            With Range("amount5").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            Range("diameter5").Interior.color = RGB(217, 217, 217)
+            Range("dr_5").Interior.color = RGB(217, 217, 217)
+            Range("frr_5").Interior.color = RGB(217, 217, 217)
+            Range("vr_5").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type5 = "T-Junction A" Then
+
+            With Range("dr_5").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=dbdc_a_array"
+            End With
+
+            With Range("amount5").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_5").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_a_array"
+            End With
+
+            Range("diameter5").Interior.color = RGB(217, 217, 217)
+            Range("degree4").Interior.color = RGB(217, 217, 217)
+            Range("vr_5").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type5 = "T-Junction B" Then
+
+            With Range("amount5").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_5").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_b_array"
+            End With
+
+            Range("diameter5").Interior.color = RGB(217, 217, 217)
+            Range("degree5").Interior.color = RGB(217, 217, 217)
+            Range("vr_5").Interior.color = RGB(217, 217, 217)
+            Range("dr_5").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type5 = "T-Junction C" Then
+
+            With Range("dr_5").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=d1dc_c_array"
+            End With
+
+            With Range("amount5").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_5").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=q1qc_c_array"
+            End With
+
+            Range("diameter5").Interior.color = RGB(217, 217, 217)
+            Range("degree5").Interior.color = RGB(217, 217, 217)
+            Range("vr_5").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type5 = "T-Junction D" Then
+
+            With Range("dr_5").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=dbdc_d_array"
+            End With
+
+            With Range("amount5").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_5").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_d_array"
+            End With
+
+            Range("diameter5").Interior.color = RGB(217, 217, 217)
+            Range("degree5").Interior.color = RGB(217, 217, 217)
+            Range("vr_5").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type5 = "T-Junction E" Then
+
+            With Range("amount5").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("frr_5").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=qbqc_e_array"
+            End With
+
+            Range("diameter5").Interior.color = RGB(217, 217, 217)
+            Range("degree5").Interior.color = RGB(217, 217, 217)
+            Range("vr_5").Interior.color = RGB(217, 217, 217)
+            Range("dr_5").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type5 = "T-Junction F1" Then
+
+            With Range("amount5").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("vr_5").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=cc_f_array"
+            End With
+
+            Range("diameter5").Interior.color = RGB(217, 217, 217)
+            Range("degree5").Interior.color = RGB(217, 217, 217)
+            Range("frr_5").Interior.color = RGB(217, 217, 217)
+            Range("dr_5").Interior.color = RGB(217, 217, 217)
+
+        ElseIf Type5 = "T-Junction F2" Then
+
+            With Range("amount5").Validation
+                .Add Type:=xlValidateWholeNumber, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlGreaterEqual, _
+                Formula1:="1"
+            End With
+
+            With Range("vr_5").Validation
+                .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Operator:=xlBetween, _
+                Formula1:="=cc_f_array"
+            End With
+
+            Range("diameter5").Interior.color = RGB(217, 217, 217)
+            Range("degree5").Interior.color = RGB(217, 217, 217)
+            Range("frr_5").Interior.color = RGB(217, 217, 217)
+            Range("dr_5").Interior.color = RGB(217, 217, 217)
+
+        Else
+        End If
+
+    Else
+
+        Range("diameter5").Validation.Delete
+        Range("PC_5").Validation.Delete
+        Range("amount5").Validation.Delete
+        Range("dr_5").Validation.Delete
+        Range("frr_5").Validation.Delete
+        Range("vr_5").Validation.Delete
+        Range("degree5").Validation.Delete
+
+        Range("diameter5").ClearContents
+        Range("PC_5").ClearContents
+        Range("amount5").ClearContents
+        Range("degree5").ClearContents
+        Range("dr_5").ClearContents
+        Range("frr_5").ClearContents
+        Range("vr_5").ClearContents
+
+        Range("diameter5").Interior.color = RGB(217, 217, 217)
+        Range("PC_5").Interior.color = RGB(217, 217, 217)
+        Range("amount5").Interior.color = RGB(217, 217, 217)
+        Range("dr_5").Interior.color = RGB(217, 217, 217)
+        Range("frr_5").Interior.color = RGB(217, 217, 217)
+        Range("vr_5").Interior.color = RGB(217, 217, 217)
+        Range("degree5").Interior.color = RGB(217, 217, 217)
+
+    End If
+
+
+End Sub
+
+Sub PipeFittings()
+
+
+'Calculating the pressure loss due to components
+
+    ' T-Junctions
+
+    Dim a_zeta
+    Dim b_zeta
+    Dim c_zeta
+    Dim d_zeta
+    Dim e_zeta
+    Dim f1_zeta
+    Dim f2_zeta
+    Dim a1_zeta
+    Dim a2_zeta
+    Dim a3_zeta
+    Dim b1_zeta
+    Dim b2_zeta
+    Dim globe1_zeta
+    Dim globe2_zeta
+    Dim ssg_zeta
+    Dim ppg_zeta
+    Dim nrv_zeta
+    Dim bend_zeta
+    Dim reducer_zeta
+    Dim expander_zeta
+
+    Dim pl_a
+    Dim pl_b
+    Dim pl_c
+    Dim pl_d
+    Dim pl_e
+    Dim pl_fa
+    Dim pl_fb
+    Dim pl_globe1
+    Dim pl_globe2
+    Dim pl_ssg
+    Dim pl_ppg
+    Dim pl_nrv
+    Dim pl_a1
+    Dim pl_a2
+    Dim pl_a3
+    Dim pl_b1
+    Dim pl_b2
+    Dim pl_bend
+    Dim pl_reducer
+    Dim pl_expander
+
+    Dim vel_a
+    Dim vel_b
+    Dim vel_c
+    Dim vel_d
+    Dim vel_e
+    Dim vel_fa
+    Dim vel_fb
+    Dim vel_a1
+    Dim vel_a2
+    Dim vel_a3
+    Dim vel_b1
+    Dim vel_b2
+    Dim vel_globe1
+    Dim vel_globe2
+    Dim vel_ssg
+    Dim vel_ppg
+    Dim vel_nrv
+    Dim vel_bend
+    Dim vel_reducer
+    Dim vel_expander
+
+    Dim Type1
+    Dim Type2
+    Dim Type3
+    Dim Type4
+    Dim Type5
+
+    Dim diameter1
+    Dim diameter2
+    Dim diameter3
+    Dim diameter4
+    Dim diameter5
+
+    Dim amount1
+    Dim amount2
+    Dim amount3
+    Dim amount4
+    Dim amount5
+
+    Dim dr_1
+    Dim dr_2
+    Dim dr_3
+    Dim dr_4
+    Dim dr_5
+
+    Dim degree1
+    Dim degree2
+    Dim degree3
+    Dim degree4
+    Dim degree5
+
+    Dim frr_1
+    Dim frr_2
+    Dim frr_3
+    Dim frr_4
+    Dim frr_5
+
+    Dim vr_1
+    Dim vr_2
+    Dim vr_3
+    Dim vr_4
+    Dim vr_5
+
+    Dim amount1_result
+    Dim amount2_result
+    Dim amount3_result
+    Dim amount4_result
+    Dim amount5_result
+
+    Dim pl_pa_1
+    Dim pl_pa_2
+    Dim pl_pa_3
+    Dim pl_pa_4
+    Dim pl_pa_5
+
+    Dim pl_mbar_1
+    Dim pl_mbar_2
+    Dim pl_mbar_3
+    Dim pl_mbar_4
+    Dim pl_mbar_5
+
+    Dim elbow_zeta_row
+    Dim elbow_zeta_column
+    Dim bend_zeta_row
+    Dim tjunction_a_zeta_row
+    Dim tjunction_a_zeta_column
+    Dim tjunction_b_zeta_column
+    Dim tjunction_c_zeta_row
+    Dim tjunction_c_zeta_column
+    Dim tjunction_d_zeta_row
+    Dim tjunction_d_zeta_column
+    Dim tjunction_e_zeta_column
+    Dim tjunction_f1_zeta_column
+    Dim tjunction_f2_zeta_column
+    Dim zeta
+
+    Type1 = Range("Type1")
+    Type2 = Range("Type2")
+    Type3 = Range("Type3")
+    Type4 = Range("Type4")
+    Type5 = Range("Type5")
+
+    'dsff
+    If Type1 Like "Elbow*" Then
+
+        elbow_zeta_row = Application.Match(Type1, Range("elbow_type_array"), 0)
+        elbow_zeta_column = Application.Match(Range("diameter1"), Range("elbows_diameter_array"), 0)
+        zeta = Application.Index(Range("elbow_zeta_array"), elbow_zeta_row, elbow_zeta_column)
+
+    ElseIf Type1 = "Bend" Then
+
+        bend_zeta_column = Application.Match(Range("diameter1"), Range("bend_diameter_array"), 0)
+        zeta = Application.Index(Range("bend_zeta_array"), 0, bend_zeta_column)
+
+    ElseIf Type1 = "T-Junction A" Then
+
+        tjunction_a_zeta_row = Application.Match(Range("dr_1"), Range("dbdc_a_array"), 0)
+        tjunction_a_zeta_column = Application.Match(Range("frr_1"), Range("qbqc_a_array"), 0)
+        zeta = Application.Index(Range("zeta_a_array"), tjunction_a_zeta_row, tjunction_a_zeta_column)
+
+    ElseIf Type1 = "T-Junction B" Then
+
+        tjunction_b_zeta_column = Application.Match(Range("frr_1"), Range("qbqc_b_array"), 0)
+        zeta = Application.Index(Range("zeta_b_array"), 0, tjunction_b_zeta_column)
+
+    ElseIf Type1 = "T-Junction C" Then
+
+        tjunction_c_zeta_row = Application.Match(Range("dr_1"), Range("d1dc_c_array"), 0)
+        tjunction_c_zeta_column = Application.Match(Range("frr_1"), Range("q1qc_a_array"), 0)
+        zeta = Application.Index(Range("zeta_c_array"), tjunction_c_zeta_row, tjunction_c_zeta_column)
+
+    ElseIf Type1 = "T-Junction D" Then
+
+        tjunction_d_zeta_row = Application.Match(Range("dr_1"), Range("dbdc_d_array"), 0)
+        tjunction_d_zeta_column = Application.Match(Range("frr_1"), Range("qbqc_d_array"), 0)
+        zeta = Application.Index(Range("zeta_d_array"), tjunction_d_zeta_row, tjunction_d_zeta_column)
+
+    ElseIf Type1 = "T-Junction E" Then
+
+        tjunction_e_zeta_column = Application.Match(Range("frr_1"), Range("qbqc_e_array"), 0)
+        zeta = Application.Index(Range("zeta_e_array"), 0, tjunction_e_zeta_column)
+
+    ElseIf Type1 = "T-Junction F1" Then
+
+        tjunction_f1_zeta_column = Application.Match(Range("vr_1"), Range("cc_f_array"), 0)
+        zeta = Application.Index(Range("zeta_f1_array"), 0, tjunction_f1_zeta_column)
+
+    ElseIf Type1 = "T-Junction F2" Then
+
+        tjunction_f2_zeta_column = Application.Match(Range("vr_1"), Range("cc_f_array"), 0)
+        zeta = Application.Index(Range("zeta_f2_array"), 0, tjunction_f2_zeta_column)
+
+    ElseIf Type1 = "Reducer" Then
+
+        reducer_zeta_column = Application.Match(Range("diameter1"), Range("reducer_diameter_array"), 0)
+        zeta = Application.Index(Range("zeta_red_array"), 0, reducer_zeta_column)
+
+
+End Sub
